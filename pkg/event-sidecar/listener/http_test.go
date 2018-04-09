@@ -133,7 +133,6 @@ func TestHTTPHandlerInvalidPayload(t *testing.T) {
 	assert.NoError(t, err)
 
 	invalidEvent := testEvent1
-	invalidEvent.Namespace = ""
 	buf1 := bytes.NewBuffer(eventJSON(&invalidEvent))
 	req1 := httptest.NewRequest("POST", "http://localhost:8080/foo", buf1)
 	w1 := httptest.NewRecorder()

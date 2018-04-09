@@ -30,12 +30,10 @@ func emptySharedListener() SharedListener {
 }
 
 var testEvent1 = events.CloudEvent{
-	Namespace:          "dispatchframework.io",
 	EventType:          "test.event",
 	EventTypeVersion:   "0.1",
 	CloudEventsVersion: events.CloudEventsVersion,
-	SourceType:         "test.source",
-	SourceID:           "test.source.id",
+	Source:             "test.source",
 	EventID:            uuid.NewV4().String(),
 	EventTime:          time.Now(),
 	SchemaURL:          "http://some.url.com/file",

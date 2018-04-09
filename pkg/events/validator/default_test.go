@@ -17,12 +17,10 @@ import (
 )
 
 var testEvent1 = events.CloudEvent{
-	Namespace:          "dispatchframework.io",
 	EventType:          "test.event",
 	EventTypeVersion:   "0.1",
 	CloudEventsVersion: events.CloudEventsVersion,
-	SourceType:         "test.source",
-	SourceID:           "test.source.id",
+	Source:             "test.source",
 	EventID:            uuid.NewV4().String(),
 	EventTime:          time.Now(),
 	SchemaURL:          "http://some.url.com/file",
@@ -35,6 +33,5 @@ func TestDefaultValidate(t *testing.T) {
 	v := validator.NewDefaultValidator()
 	assert.NoError(t, v.Validate(&testEvent1))
 	incorrect := testEvent1
-	incorrect.Namespace = ""
 	assert.Error(t, v.Validate(&incorrect))
 }

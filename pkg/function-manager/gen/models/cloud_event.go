@@ -24,48 +24,40 @@ type CloudEvent struct {
 
 	// cloud events version
 	// Required: true
-	CloudEventsVersion *string `json:"cloud-events-version"`
+	CloudEventsVersion *string `json:"cloudEventsVersion"`
 
 	// content type
-	ContentType string `json:"content-type,omitempty"`
+	ContentType string `json:"contentType,omitempty"`
 
 	// data
 	// Max Length: 0
 	Data string `json:"data,omitempty"`
 
-	// event id
+	// event ID
 	// Required: true
-	EventID *string `json:"event-id"`
+	EventID *string `json:"eventID"`
 
 	// event time
-	EventTime strfmt.DateTime `json:"event-time,omitempty"`
+	EventTime strfmt.DateTime `json:"eventTime,omitempty"`
 
 	// event type
 	// Required: true
 	// Max Length: 128
 	// Pattern: ^[\w\d\-\.]+$
-	EventType *string `json:"event-type"`
+	EventType *string `json:"eventType"`
 
 	// event type version
-	EventTypeVersion string `json:"event-type-version,omitempty"`
+	EventTypeVersion string `json:"eventTypeVersion,omitempty"`
 
 	// extensions
 	Extensions map[string]interface{} `json:"extensions,omitempty"`
 
-	// namespace
-	// Required: true
-	Namespace *string `json:"namespace"`
+	// schema URL
+	SchemaURL string `json:"schemaURL,omitempty"`
 
-	// schema url
-	SchemaURL string `json:"schema-url,omitempty"`
-
-	// source id
+	// source
 	// Required: true
-	SourceID *string `json:"source-id"`
-
-	// source type
-	// Required: true
-	SourceType *string `json:"source-type"`
+	Source *string `json:"source"`
 }
 
 // Validate validates this cloud event
@@ -97,17 +89,7 @@ func (m *CloudEvent) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateNamespace(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateSourceID(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateSourceType(formats); err != nil {
+	if err := m.validateSource(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -120,7 +102,7 @@ func (m *CloudEvent) Validate(formats strfmt.Registry) error {
 
 func (m *CloudEvent) validateCloudEventsVersion(formats strfmt.Registry) error {
 
-	if err := validate.Required("cloud-events-version", "body", m.CloudEventsVersion); err != nil {
+	if err := validate.Required("cloudEventsVersion", "body", m.CloudEventsVersion); err != nil {
 		return err
 	}
 
@@ -142,7 +124,7 @@ func (m *CloudEvent) validateData(formats strfmt.Registry) error {
 
 func (m *CloudEvent) validateEventID(formats strfmt.Registry) error {
 
-	if err := validate.Required("event-id", "body", m.EventID); err != nil {
+	if err := validate.Required("eventID", "body", m.EventID); err != nil {
 		return err
 	}
 
@@ -155,7 +137,7 @@ func (m *CloudEvent) validateEventTime(formats strfmt.Registry) error {
 		return nil
 	}
 
-	if err := validate.FormatOf("event-time", "body", "date-time", m.EventTime.String(), formats); err != nil {
+	if err := validate.FormatOf("eventTime", "body", "date-time", m.EventTime.String(), formats); err != nil {
 		return err
 	}
 
@@ -164,42 +146,24 @@ func (m *CloudEvent) validateEventTime(formats strfmt.Registry) error {
 
 func (m *CloudEvent) validateEventType(formats strfmt.Registry) error {
 
-	if err := validate.Required("event-type", "body", m.EventType); err != nil {
+	if err := validate.Required("eventType", "body", m.EventType); err != nil {
 		return err
 	}
 
-	if err := validate.MaxLength("event-type", "body", string(*m.EventType), 128); err != nil {
+	if err := validate.MaxLength("eventType", "body", string(*m.EventType), 128); err != nil {
 		return err
 	}
 
-	if err := validate.Pattern("event-type", "body", string(*m.EventType), `^[\w\d\-\.]+$`); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CloudEvent) validateNamespace(formats strfmt.Registry) error {
-
-	if err := validate.Required("namespace", "body", m.Namespace); err != nil {
+	if err := validate.Pattern("eventType", "body", string(*m.EventType), `^[\w\d\-\.]+$`); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func (m *CloudEvent) validateSourceID(formats strfmt.Registry) error {
+func (m *CloudEvent) validateSource(formats strfmt.Registry) error {
 
-	if err := validate.Required("source-id", "body", m.SourceID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CloudEvent) validateSourceType(formats strfmt.Registry) error {
-
-	if err := validate.Required("source-type", "body", m.SourceType); err != nil {
+	if err := validate.Required("source", "body", m.Source); err != nil {
 		return err
 	}
 

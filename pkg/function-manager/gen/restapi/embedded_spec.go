@@ -494,37 +494,35 @@ func init() {
     "CloudEvent": {
       "type": "object",
       "required": [
-        "namespace",
-        "event-type",
-        "cloud-events-version",
-        "source-type",
-        "source-id",
-        "event-id"
+        "eventType",
+        "cloudEventsVersion",
+        "source",
+        "eventID"
       ],
       "properties": {
-        "cloud-events-version": {
+        "cloudEventsVersion": {
           "type": "string"
         },
-        "content-type": {
+        "contentType": {
           "type": "string"
         },
         "data": {
           "type": "string",
           "maxLength": 0
         },
-        "event-id": {
+        "eventID": {
           "type": "string"
         },
-        "event-time": {
+        "eventTime": {
           "type": "string",
           "format": "date-time"
         },
-        "event-type": {
+        "eventType": {
           "type": "string",
           "maxLength": 128,
           "pattern": "^[\\w\\d\\-\\.]+$"
         },
-        "event-type-version": {
+        "eventTypeVersion": {
           "type": "string"
         },
         "extensions": {
@@ -533,16 +531,10 @@ func init() {
             "type": "object"
           }
         },
-        "namespace": {
+        "schemaURL": {
           "type": "string"
         },
-        "schema-url": {
-          "type": "string"
-        },
-        "source-id": {
-          "type": "string"
-        },
-        "source-type": {
+        "source": {
           "type": "string"
         }
       }
@@ -1235,37 +1227,35 @@ func init() {
     "CloudEvent": {
       "type": "object",
       "required": [
-        "namespace",
-        "event-type",
-        "cloud-events-version",
-        "source-type",
-        "source-id",
-        "event-id"
+        "eventType",
+        "cloudEventsVersion",
+        "source",
+        "eventID"
       ],
       "properties": {
-        "cloud-events-version": {
+        "cloudEventsVersion": {
           "type": "string"
         },
-        "content-type": {
+        "contentType": {
           "type": "string"
         },
         "data": {
           "type": "string",
           "maxLength": 0
         },
-        "event-id": {
+        "eventID": {
           "type": "string"
         },
-        "event-time": {
+        "eventTime": {
           "type": "string",
           "format": "date-time"
         },
-        "event-type": {
+        "eventType": {
           "type": "string",
           "maxLength": 128,
           "pattern": "^[\\w\\d\\-\\.]+$"
         },
-        "event-type-version": {
+        "eventTypeVersion": {
           "type": "string"
         },
         "extensions": {
@@ -1274,16 +1264,10 @@ func init() {
             "type": "object"
           }
         },
-        "namespace": {
+        "schemaURL": {
           "type": "string"
         },
-        "schema-url": {
-          "type": "string"
-        },
-        "source-id": {
-          "type": "string"
-        },
-        "source-type": {
+        "source": {
           "type": "string"
         }
       }

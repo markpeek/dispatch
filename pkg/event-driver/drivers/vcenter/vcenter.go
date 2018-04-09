@@ -159,12 +159,10 @@ func (d *vCenterDriver) dispatchEvent(topic string, ve *vCenterEvent) (*events.C
 	}
 
 	event := events.CloudEvent{
-		Namespace:          "vcenter.vmware.com",
 		EventType:          topic,
 		EventTypeVersion:   eventTypeVersion,
 		CloudEventsVersion: events.CloudEventsVersion,
-		SourceType:         "vcenter",
-		SourceID:           "vcenter1", // TODO: make this unique
+		Source:             "com.vmware.vcenter",
 		EventID:            uuid.NewV4().String(),
 		EventTime:          time.Time{},
 		ContentType:        "application/json",

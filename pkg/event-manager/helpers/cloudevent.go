@@ -23,12 +23,10 @@ func CloudEventFromSwagger(e *models.CloudEvent) *events.CloudEvent {
 		return nil
 	}
 	return &events.CloudEvent{
-		Namespace:          *e.Namespace,
 		EventType:          *e.EventType,
 		EventTypeVersion:   e.EventTypeVersion,
 		CloudEventsVersion: *e.CloudEventsVersion,
-		SourceType:         *e.SourceType,
-		SourceID:           *e.SourceID,
+		Source:             *e.Source,
 		EventID:            *e.EventID,
 		EventTime:          time.Time(e.EventTime),
 		SchemaURL:          e.SchemaURL,
@@ -52,9 +50,7 @@ func CloudEventToSwagger(e *events.CloudEvent) *models.CloudEvent {
 		EventType:          swag.String(e.EventType),
 		EventTypeVersion:   e.EventTypeVersion,
 		Extensions:         e.Extensions,
-		Namespace:          swag.String(e.Namespace),
 		SchemaURL:          e.SchemaURL,
-		SourceID:           swag.String(e.SourceID),
-		SourceType:         swag.String(e.SourceType),
+		Source:             swag.String(e.Source),
 	}
 }

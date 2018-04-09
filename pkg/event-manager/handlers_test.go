@@ -25,12 +25,10 @@ import (
 )
 
 var testCloudEvent1 = eventtypes.CloudEvent{
-	Namespace:          "dispatchframework.io",
 	EventType:          "test.event",
 	EventTypeVersion:   "0.1",
 	CloudEventsVersion: eventtypes.CloudEventsVersion,
-	SourceType:         "testsource",
-	SourceID:           "testsource-id",
+	Source:             "testsource",
 	EventID:            uuid.NewV4().String(),
 	EventTime:          time.Now(),
 	SchemaURL:          "http://some.url.com/file",

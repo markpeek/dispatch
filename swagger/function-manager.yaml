@@ -446,35 +446,29 @@ definitions:
   CloudEvent:
     type: object
     required:
-    - namespace
-    - event-type
-    - cloud-events-version
-    - source-type
-    - source-id
-    - event-id
+    - eventType
+    - cloudEventsVersion
+    - source
+    - eventID
     properties:
-      namespace:
-        type: string
-      event-type:
+      eventType:
         type: string
         maxLength: 128
         pattern: '^[\w\d\-\.]+$'
-      event-type-version:
+      eventTypeVersion:
         type: string
-      cloud-events-version:
+      cloudEventsVersion:
         type: string
-      source-type:
+      source:
         type: string
-      source-id:
+      eventID:
         type: string
-      event-id:
-        type: string
-      event-time:
+      eventTime:
         type: string
         format: date-time
-      schema-url:
+      schemaURL:
         type: string
-      content-type:
+      contentType:
         type: string
       extensions:
         type: object

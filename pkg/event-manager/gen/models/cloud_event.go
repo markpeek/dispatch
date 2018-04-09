@@ -51,20 +51,12 @@ type CloudEvent struct {
 	// extensions
 	Extensions map[string]interface{} `json:"extensions,omitempty"`
 
-	// namespace
-	// Required: true
-	Namespace *string `json:"namespace"`
-
 	// schema url
 	SchemaURL string `json:"schema-url,omitempty"`
 
-	// source id
+	// source
 	// Required: true
-	SourceID *string `json:"source-id"`
-
-	// source type
-	// Required: true
-	SourceType *string `json:"source-type"`
+	Source *string `json:"source"`
 }
 
 // Validate validates this cloud event
@@ -91,17 +83,7 @@ func (m *CloudEvent) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateNamespace(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateSourceID(formats); err != nil {
-		// prop
-		res = append(res, err)
-	}
-
-	if err := m.validateSourceType(formats); err != nil {
+	if err := m.validateSource(formats); err != nil {
 		// prop
 		res = append(res, err)
 	}
@@ -160,27 +142,9 @@ func (m *CloudEvent) validateEventType(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *CloudEvent) validateNamespace(formats strfmt.Registry) error {
+func (m *CloudEvent) validateSource(formats strfmt.Registry) error {
 
-	if err := validate.Required("namespace", "body", m.Namespace); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CloudEvent) validateSourceID(formats strfmt.Registry) error {
-
-	if err := validate.Required("source-id", "body", m.SourceID); err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (m *CloudEvent) validateSourceType(formats strfmt.Registry) error {
-
-	if err := validate.Required("source-type", "body", m.SourceType); err != nil {
+	if err := validate.Required("source", "body", m.Source); err != nil {
 		return err
 	}
 
